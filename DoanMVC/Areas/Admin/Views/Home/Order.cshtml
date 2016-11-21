@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Model.EF.ORDER>
+<table class="table table-striped table-bordered table-hover">
+    <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                Tên khách hàng
+            </th>
+            <th>
+                Email
+            </th>
+            <th>
+                Ngày tạo
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr id="row_@item.ID">
+                <td>@item.ID</td>
+                <td>@item.ShipName</td>
+                <td>@item.ShipEmail</td>
+                <td>@item.CretedDate</td>
+            </tr>
+        }
+    </tbody>
+</table>
+

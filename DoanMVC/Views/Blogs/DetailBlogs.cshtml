@@ -1,0 +1,73 @@
+﻿
+@model Model.EF.CONTENT
+@{
+    ViewBag.Title = "DetailBlogs";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<main class="wrapper main-content" role="main">
+
+    <!-- /snippets/breadcrumb.liquid -->
+
+    <nav class="breadcrumb" role="navigation" aria-label="breadcrumbs">
+        <img src='../../../hstatic.net/033/1000104033/1000147703/bg-breadcrumb8f26.jpg?v=55' alt='' />
+        <div class="inner">
+            <div class="breadcrumb-list">
+                <a href="../../index.html" title="Quay lại trang chủ">Trang chủ</a>
+
+                <span aria-hidden="true">/</span>
+                <a href="../news.html" title="">Tin tức</a>
+                <span aria-hidden="true">/</span>
+                <span></span>
+
+            </div>
+
+        </div>
+    </nav>
+
+    <!-- /templates/article.liquid -->
+
+    <div class="grid">
+        <article class="grid__item large--three-quarters" itemscope itemtype="http://schema.org/Article">
+
+            <header class="section-header">
+                <div class="section-header__left">
+                    <h1>@Model.Name</h1>
+
+
+                    <p class="entry-meta">Người viết <strong>@Model.CreatedBy</strong> lúc <time datetime=":">@Model.CreatedDate</time></p>
+                </div>
+            </header>
+
+            <div class="rte" itemprop="articleBody">
+                <p><span>@Model.Detail</span></p>
+            </div>
+            <ul class="inline-list">
+                <!-- /snippets/tags-article.liquid -->
+                <li>
+                    <span>Tags:</span>
+
+                    <a href="/tin-tuc.html">Tin tức</a>,
+
+                    <a href="/">Trang chủ</a>,
+
+                    <a href="/san-pham.html">Sản phẩm</a>,
+
+                    <a href="/lien-he.html">liên hệ</a>,
+
+                </li>
+            </ul>
+        </article>
+
+        <aside class="sidebar grid__item large--one-quarter" role="complementary">
+            <!-- /snippets/blog-sidebar.liquid -->
+
+            <div class="widget widget-blog-recent">
+                @{ Html.RenderAction("ContentCategory", "Blogs");}
+            </div>
+            @{ Html.RenderAction("ProductMenu", "Produc");}<!-- end category sidebar -->
+        </aside>
+    </div>
+
+
+</main>
+

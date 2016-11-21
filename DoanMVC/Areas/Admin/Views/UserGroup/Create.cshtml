@@ -1,0 +1,62 @@
+﻿@model DoanMVC.Models.UserGroupViewModel
+@{
+    ViewBag.Title = "Trang tạo mới nhóm người dùng";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAD.cshtml";
+}
+@section header{
+    Thêm mới nhóm người dùng
+}
+@section jsFooter{
+    <script src="~/Content/admin/js/controller/addUserGroupController.js"></script>
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Nhập thông tin nhóm người dùng.
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-12">
+                        @using (Html.BeginForm())
+                        {
+                            @Html.AntiForgeryToken()
+                            @Html.ValidationSummary(true, null, new { @class = "text-danger" })
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.Name)
+                                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group">
+                                @foreach (var item in (IEnumerable<Model.EF.ROLE>)ViewBag.Role)
+                                {
+                                    <label class="role">
+                                        <input type="checkbox" class="mYcheckbox" value="@(item.ID)">@item.Name
+                                    </label>
+                                }
+                            </div>
+
+                            <div class="form-group">
+                                <label class="role">
+                                    <input type="checkbox" id="select_all">Selecct All
+                                </label>
+                            </div>
+
+                            @Html.TextBoxFor(model => model.Role, new { @class = "form-control hidden", @id = "txtRole" })
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Tạo mới" class="btn btn-default" />
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

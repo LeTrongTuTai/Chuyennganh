@@ -1,0 +1,78 @@
+﻿@model List<DoanMVC.Models.CartItem>
+
+@{
+    decimal thanhtien = 0;
+    int soluong = 0;
+    foreach (var item in Model)
+    {
+        var tongtien = (item.Product.PromotionPrice.HasValue) ? (item.Product.PromotionPrice.Value * @item.Quantity) : (item.Product.Price * @item.Quantity);
+        thanhtien += decimal.Parse(tongtien.ToString());
+        soluong += item.Quantity;
+    }
+}
+
+@if (Model.Count > 0)
+{
+    <form action="/thanh-toan.html" method="get" novalidate="" class="cart ajaxcart">
+        <div class="ajaxcart__inner">
+            @foreach (var item in Model)
+            {
+                <div class="ajaxcart__product">
+                    <div class="ajaxcart__row" data-line="2">
+                        <div class="grid">
+                            <div class="grid__item one-quarter">
+                                <a href="/chi-tiet/@item.Product.Metatitle-@item.Product.ID+".html"" class="ajaxcart__product-image"><img src="@item.Product.Image" alt=""></a>
+                            </div>
+                            <div class="grid__item three-quarters">
+                                <p>
+                                    <a href="/chi-tiet/@item.Product.Metatitle-@item.Product.ID+".html"" class="ajaxcart__product-name">@item.Product.Name</a>
+                                </p>
+
+                                <div class="grid--full display-table">
+                                    <div class="grid__item display-table-cell one-half">
+                                        <div class="ajaxcart__qty">
+                                            <button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--minus icon-fallback-text" data-id="1007973596" data-qty="3" data-line="2">
+                                                <span class="icon icon-minus" aria-hidden="true"></span>
+                                                <span class="fallback-text">−</span>
+                                            </button>
+                                            <input type="text" name="updates[]" class="ajaxcart__qty-num" value="@item.Quantity" min="0" data-id="1007973596" data-line="2" aria-label="quantity" pattern="[0-9]*">
+                                            <button type="button" class="ajaxcart__qty-adjust ajaxcart__qty--plus icon-fallback-text" data-id="1007973596" data-line="2" data-qty="5">
+                                                <span class="icon icon-plus" aria-hidden="true"></span>
+                                                <span class="fallback-text">+</span>
+                                            </button>
+                                        </div>
+                                    </div>
+                                    <div class="grid__item display-table-cell one-half text-right">
+                                       @(item.Product.PromotionPrice.HasValue ? item.Product.PromotionPrice.Value.ToString("N0") : item.Product.Price.Value.ToString("N0"))₫
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div>
+                <label for="CartSpecialInstructions">Ghi chú bán hàng</label>
+                <textarea name="note" class="input-full" id="CartSpecialInstructions"></textarea>
+            </div>
+
+        </div>
+        <div class="ajaxcart__footer">
+            <div class="grid--full">
+                <div class="grid__item two-thirds">
+                    <p>Tổng</p>
+                </div>
+                <div class="grid__item one-third text-right">
+                    <p>@thanhtien₫</p>
+                </div>
+            </div>
+            <p class="text-center">Giao hàng &amp; tính thuế khi bán hàng</p>
+            <button type="submit" class="btn--secondary btn--full cart__checkout" id="btn_checkout" name="checkout">
+                Thanh toán →
+            </button>
+
+        </div>
+    </form>
+}
+
+

@@ -1,0 +1,57 @@
+﻿@model List<Model.EF.PRODUCT>
+
+
+        @foreach (var item in Model)
+        {
+            var url = "/chi-tiet/" + item.Metatitle + "-" + item.ID + ".html";
+            <div class="grid__item  large--one-quarter medium--one-half ">
+                <div class="product-container" data-publish-date="">
+                    <div class="product-image ">
+                        <div class="product-thumbnail">
+                            <a href="@url">
+                                <img class="product-featured-image" src="@item.Image" alt="@item.Name">
+                                <img class="back-img" src="@item.MoreImages" alt="@item.Name">
+                            </a>
+                        </div><!-- /.product-thumbnail -->
+                        
+                    </div><!-- /.product-image -->
+                    <div class="product-meta">
+                        <h4 class="product-name">
+                            <a href="@url" title="@item.Name">@item.Name</a>
+                        </h4><!-- /.product-product -->
+                        <div class="product-price">
+                            <span class="amout">
+
+                                <del class="sale-price">@(item.Price.HasValue ? item.Price.Value.ToString("N0") + " VNĐ":"Liện hệ")</del>
+                                <span>@(item.PromotionPrice.HasValue ? item.PromotionPrice.Value.ToString("N0") + " VNĐ":"Liên hệ")</span>
+                            </span>
+                        </div><!-- /.product-price -->
+                        <span class="haravan-product-reviews-badge" data-id="1002812496"></span> <!-- end rating -->
+                    </div><!-- /.product-meta -->
+                    <div class="product-actions">
+                        <form method="post" action="/Carts/AddItem?productId=@item.ID" class="add-to-cart">
+                            <input type="hidden" name="id" value="1007972670" />
+                            <!-- <input type="submit" value="Buy now" class="btn" /> -->
+                            <button type="submit" name="add" class="btn">
+                                <span class="lnr lnr-cart "></span>
+                                Thêm vào giỏ
+                            </button>
+                        </form>
+                        <div class="add-links">
+
+                            <a class="btn wishlist  awe-button product-quick-whistlist" href="account/login.html" data-toggle="tooltip" title="Yêu thích">
+                                <i class="fa fa-heart"></i>
+                                Yêu thích
+                            </a>
+                            <a href="@url" class="btn product-quick-view btn-detail" title="Chi tiết">
+                                <i class="fa fa-expand" aria-hidden="true"></i>
+                                Chi tiết
+                            </a>
+                        </div>
+
+                    </div>
+                </div> <!-- product-container -->
+            </div>
+        }
+
+

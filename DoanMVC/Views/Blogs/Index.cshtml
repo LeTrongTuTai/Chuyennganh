@@ -1,0 +1,60 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<main class="wrapper main-content" role="main">
+
+    <!-- /snippets/breadcrumb.liquid -->
+
+    <nav class="breadcrumb" role="navigation" aria-label="breadcrumbs">
+        <img src='../../hstatic.net/033/1000104033/1000147703/bg-breadcrumb8f26.jpg?v=55' alt='' />
+        <div class="inner">
+            <div class="breadcrumb-list">
+                <a href="../index.html" title="Quay lại trang chủ">Trang chủ</a>
+
+                <span aria-hidden="true">/</span>
+
+                <span>Tin tức</span>
+
+
+            </div>
+
+
+
+            <h3 class="page_name">Tin tức</h3>
+
+        </div>
+    </nav>
+
+
+    <!-- /templates/blog.liquid -->
+
+
+
+    <div class="grid--rev">
+        <div class="grid__item large--three-quarters">
+
+            <h1>Tin tức</h1>
+
+            <div class="list-blog">
+                @{ Html.RenderAction("Blogs", "Blogs");}
+            </div>
+
+        </div>
+        <div class="sidebar grid__item large--one-quarter">
+            <!-- /snippets/blog-sidebar.liquid -->
+
+            <div class="widget widget-blog-recent">
+                @{ Html.RenderAction("ContentCategory", "Blogs");}
+            </div>
+
+             @{ Html.RenderAction("ProductMenu", "Produc");}<!-- end category sidebar -->
+        </div>
+    </div>
+
+
+
+</main>
+

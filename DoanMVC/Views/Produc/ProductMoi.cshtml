@@ -1,0 +1,193 @@
+﻿
+@{
+    ViewBag.Title = "ProductMoi";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section jsFooter{
+    <script src="~/Areas/Client/js/Controllers/productAllMoiController.js"></script>
+}
+<main class="wrapper main-content" role="main">
+
+    <!-- /snippets/breadcrumb.liquid -->
+    <nav class="breadcrumb" role="navigation" aria-label="breadcrumbs">
+        <img src='../../hstatic.net/033/1000104033/1000147703/bg-breadcrumb8f26.jpg?v=55' alt='' />
+        <div class="inner">
+            <div class="breadcrumb-list">
+                <a href="../index.html" title="Quay lại trang chủ">Trang chủ</a>
+
+                <span aria-hidden="true">/</span>
+
+                <span>Danh sách sản phẩm</span>
+            </div>
+
+            <h3 class="page_name">Bộ sưu tập</h3>
+
+        </div>
+    </nav>
+
+
+    <!-- /templates/collection.liquid -->
+    <div class="grid--rev">
+        <div class="grid__item large--three-quarters collection-grid">
+
+            <header class="collection__info section-header">
+
+                <div class="rte rte--header space-10">
+
+                </div>
+            </header>
+
+            <div class="collection__sort section-header">
+                <div class="section-header__right">
+                    <!-- /snippets/collection-sorting.liquid -->
+                    <div class="form-horizontal">
+                        <label for="SortBy">Sắp xếp bởi</label>
+                        <select name="SortBy" id="SortBy">
+                            <option value="0">Đặc tính</option>
+                            <option value="title-ascending">Theo thứ tự, A-Z</option>
+                            <option value="title-descending">Theo thứ tự, Z-A</option>
+                            <option value="price-ascending">Giá, từ thấp đến cao</option>
+                            <option value="price-descending">Giá, Từ cao đến thấp</option>
+                            <option value="created-descending">Ngày, mới đến cũ</option>
+                            <option value="created-ascending">Ngày, cũ đến mới</option>
+                        </select>
+                    </div>
+                    <div class="collection-view left">
+                        <button type="button" title="Lưới xem" class="change-view" id="list_grid">
+                            <span class="icon-fallback-text">
+                                <span class="icon icon-grid-view" aria-hidden="true"></span>
+                                <span class="fallback-text">Lưới xem</span>
+                            </span>
+                        </button>
+                        <button type="button" title="Danh sách xem" class="change-view" id="list_view">
+                            <span class="icon-fallback-text">
+                                <span class="icon icon-list-view" aria-hidden="true"></span>
+                                <span class="fallback-text">Danh sách xem</span>
+                            </span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+            <div class="grid-uniform" id="tblData">
+            </div>
+            <div id="pagination" class="pagination">
+            </div>
+
+
+        </div>
+
+        <div class="sidebar grid__item large--one-quarter">
+            <div class="collection-sidebar">
+                @{ Html.RenderAction("ProductMenu", "Produc");}
+                <!-- end category sidebar -->
+
+                @{Html.RenderAction("ProductHot", "Produc"); }
+
+                <div class="widget-ads widget">
+                    <a href="#"><img src='../../hstatic.net/033/1000104033/1000147703/ads_block8f26.jpg?v=55' alt='' /></a>
+                </div><!-- end advertising -->
+
+
+
+                <div class="widget-cms widget">
+
+                    <h4 class="widget__title">CMS Hướng dẫn</h4>
+
+                    <em> Khối CMS tùy chỉnh hiển thị ở thanh bên trái trên Catalog trang, Đặt nội dung của riêng bạn ở đây:Text, html, hình ảnh, truyền thông, bất cứ điều gì bạn thích </em> <br> <em> Có rất nhiều tương tự như giữ chỗ nội dung mẫu trên cửa hàng. Tất cả có thể chỉnh sửa từ bảng quản trị.</em>
+                </div><!-- end advertising -->
+
+            </div>
+
+        </div>
+    </div>
+</main>
+
+<script id="data-template" type="x-tmpl-mustache">
+    <div class="grid__item  large--one-third medium--one-third ">
+
+        <div class="product-container" data-publish-date="">
+            <div class="product-image ">
+                <div class="product-thumbnail">
+                    <a href="{{url}}">
+                        <img class="product-featured-image" src="{{ProductImage}}" alt="{{ProductName}}">
+                        <img class="back-img" src="{{ProductImage}}" alt="{{ProductName}}">
+                    </a>
+                </div>
+                {{#sale}}
+                <span class="label on-sale">Giảm</span><!-- /.product-thumbnail -->
+                {{/sale}}
+            </div><!-- /.product-image -->
+            <div class="product-meta">
+                <h4 class="product-name">
+                    <a>{{ProductName}}</a>
+                </h4><!-- /.product-product -->
+                <div class="product-price">
+                    <span class="amout">
+                        {{#sale}}
+                        <del class="sale-price">{{ProductPrice}}₫</del>
+                        <span>{{PromotionPrice}}₫</span>
+                        {{/sale}}
+                        {{^sale}}
+                        <span>{{ProductPrice}}₫</span>
+                        {{/sale}}
+                    </span>
+                </div><!-- /.product-price -->
+                <span class="haravan-product-reviews-badge" data-id="1002813186"></span> <!-- end rating -->
+            </div><!-- /.product-meta -->
+
+            <div class="product-actions">
+                <form method="post" action="/Carts/AddItem?productId={{ProductID}}" class="add-to-cart">
+                    <input type="hidden" name="id" value="1007973596" />
+                    <!-- <input type="submit" value="Buy now" class="btn" /> -->
+                    <button type="submit" name="add" class="btn">
+                        <span class="lnr lnr-cart "></span>
+                        Thêm vào giỏ
+                    </button>
+                </form>
+                <div class="add-links">
+
+                    <a class="btn wishlist  awe-button product-quick-whistlist" href="../account/login.html" data-toggle="tooltip" title="Yêu thích">
+                        <i class="fa fa-heart"></i>
+                        Yêu thích
+                    </a>
+                    <a href="{{url}}" class="btn product-quick-view btn-detail" title="Chi tiết">
+                        <i class="fa fa-expand" aria-hidden="true"></i>
+                        Chi tiết
+                    </a>
+                </div>
+
+            </div>
+        </div> <!-- product-container -->
+
+    </div>
+</script>
+
+<script id="data-template-list" type="x-tmpl-mustache">
+    <div class="grid__item">
+        <div class="grid large--display-table">
+            <div class="grid__item large--two-eighths large--display-table-cell medium--one-third">
+                <a href="{{url}}">
+                    <img src="{{ProductImage}}" alt="{{ProductName}}" class="grid__image">
+                </a>
+            </div>
+            <div class="grid__item large--six-eighths large--display-table-cell medium--two-thirds">
+                <p class="h6">{{ProductName}}</p>
+                <div class="product-price">
+                    {{#sale}}
+                    <strong>Giảm</strong>
+                    {{PromotionPrice}}₫
+                    <br><span class="visually-hidden">Giá ban đầu</span><s>{{ProductPrice}}₫</s>
+                    {{/sale}}
+                    {{^sale}}
+                    {{ProductPrice}}₫
+                    {{/sale}}
+                </div>
+                <div class="rte">
+                    <p>{{ProductDescription}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
+

@@ -1,0 +1,14 @@
+﻿@model List<Model.EF.MENU>
+<div class="medium-down--hide">
+    <!-- begin site-nav -->
+    <ul class="site-nav" id="AccessibleNav">
+        @foreach (var item in Model)
+        {
+            <li class="site-nav--active">
+               <h4> <a href="@item.Link" target="@item.Target">@item.Text </a></h4>
+            </li>
+        }
+       
+    </ul>
+    <!-- //site-nav -->
+</div>

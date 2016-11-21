@@ -1,0 +1,70 @@
+﻿@model Model.EF.FEEDBACK
+
+@{
+    ViewBag.Title = "Trang chi tiết phản hồi";
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAD.cshtml";
+}
+
+@section header{
+    Chi tiết phản hồi
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Thông tin phản hồi.
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ID)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.ID)
+                        </dd>
+                        <dt>
+                            Tên
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Name)
+                        </dd>
+                        <dt>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Email)
+                        </dd>
+                        <dt>
+                            Điện thoại
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Phone)
+                        </dd>
+                        <dt>
+                            Nội dung
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.Content)
+                        </dd>
+                        <dt>
+                            Ngày tạo
+                        </dt>
+                        <dd>
+                            @Html.DisplayFor(model => model.CreatedDate)
+                        </dd>
+                        <dt>
+                            Trạng thái
+                        </dt>
+                        <dd>
+                            @Html.Raw(Model.Status ? "Kích hoạt" : "Khoá")
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<p>
+    @Html.ActionLink("Back to List", "Index")
+</p>

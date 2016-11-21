@@ -1,0 +1,29 @@
+﻿@model List<Model.EF.PRODUCT>
+<div class="widget-product widget">
+    <h4 class="widget__title">Sản phẩm nổi bật</h4>
+    <div class="widget__content">
+        @foreach (var item in Model)
+        {
+            var url = "/chi-tiet/" + item.Metatitle + "-" + item.ID + ".html";
+            <div class="item">
+                <div class="product-image">
+                    <a href="@url">
+                        <img class="product-featured-image" src="@item.Image" alt="@item.Name">
+                    </a>
+                </div>
+                <div class="product-meta">
+                    <a class="product-name">@item.Name</a>
+
+                    <div class="product-price">
+                        <span class="amout">
+                            <span>
+                                @(item.PromotionPrice.HasValue ? item.PromotionPrice.Value.ToString("N0")+" VNĐ" : "Liên hệ")
+                            </span>
+                        </span>
+                    </div>	<!-- /.product-price -->
+                </div><!-- /.product-meta -->
+            </div>
+        }
+
+    </div>
+</div>

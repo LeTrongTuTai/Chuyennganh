@@ -1,0 +1,15 @@
+﻿@model List<Model.EF.SLIDE>
+
+<div class="inner space-20 section-slider">
+    <!-- /templates/snippets/section-slider.liquid -->
+    <div class="slider-carousel owl-carousel owl-theme" id="slider-carousel" data-mobile="[479,1]" data-tabletsmall="[768,1]" data-desktopsmall="[979,1]" data-desktop="[1199,1]" data-pagination="false" data-navigation="true" data-autoPlay="8000" data-items="1">
+       @foreach (var item in Model)
+       {
+        <div class="text-center">
+            <a class="slide" href="@item.Link" title=""><img src='@item.Image' alt='' /></a>
+        </div>
+       }
+         
+    </div>
+
+</div>

@@ -1,0 +1,104 @@
+﻿@model List< DoanMVC.Models.CartItem >
+@{
+    ViewBag.Title = "Payment";
+    Layout = "~/Views/Shared/_LayoutPM.cshtml";
+}
+
+@{
+    decimal thanhtien = 0;
+    int soluong = 0;
+    foreach (var item in Model)
+    {
+        var tongtien = (item.Product.PromotionPrice.HasValue) ? (item.Product.PromotionPrice.Value * @item.Quantity) : (item.Product.Price * @item.Quantity);
+        thanhtien += decimal.Parse(tongtien.ToString());
+        soluong += item.Quantity;
+    }
+    var urlrequest = HttpContext.Current.Request.Url.AbsolutePath;
+}
+@section footerJS{
+<script src="/Areas/Client/js/Controllers/payment.js"></script>
+}
+
+<span class="fbtracker-checkout"></span>
+<a href="/gio-hang.html"><h1><span class="btn-back">Quay về giỏ hàng</span>Basic</h1></a>
+<div class="container clearfix">
+    <div class="col-4 step1">
+        <h2>Thông tin giao hàng</h2>
+        <div class="user-login"><a href="/dang-nhap.html?urlredirect=@urlrequest">Đăng nhập</a></div>
+        <div class="line"></div>
+        <div class="form-info">
+            <label class="color-blue">Mua không cần tài khoản</label>
+            <form accept-charset="UTF-8" class="new_order" id="forminfo" method="post" novalidate="novalidate">
+                <div class="form-group">
+                    <input placeholder="Họ và tên" title="Nhập họ tên" class="formcontrol" id="txtName" name="full_name" size="30" type="text" required="">
+                    <p>Họ và tên</p>
+                </div>
+                <div class="form-group">
+                    <input placeholder="Số điện thoại" maxlength="11" id="txtPhone" class="formcontrol" name="phone" size="30" title="Nhập số điện thoại" pattern="^\d{8,11}" type="tel" value="" required="" aria-required="true">
+                    <p>Số điện thoại</p>
+                </div>
+                <div class="form-group">
+                    <input placeholder="Email" id="txtEmail" title="Nhập email" name="email" class="formcontrol" size="30" type="email" value="" required="">
+                    <p>Email</p>
+                </div>
+                <div class="form-group">
+                    <input placeholder="Địa chỉ" id="txtAddress" title="Nhập địa chỉ" class="formcontrol" name="address" size="30" type="text" value="" required="">
+                    <p>Địa chỉ</p>
+                </div>
+                <div class="form-group">
+                    <textarea id="txtMessage" placeholder="Ghi chú đơn hàng" name="billing_address[note]" rows="3" class="formcontrol ordernote"></textarea>
+                    <p>Ghi chú đơn hàng</p>
+                </div>
+                <div class="error summary">
+                    (<span class="color-red ">*</span>)Vui lòng nhập đủ thông tin
+                </div>
+            </form>
+        </div>
+        <div class="listerror">
+        </div>
+    </div>
+    <div class="col-4">
+        <h3>Thanh toán</h3>
+        <div class="shiping-ajax">
+            <label class="lb-method">
+                <input class="input-method" type="radio" checked="checked" name="gateway" value="122493">
+                <span class="label-radio"> Thanh toán khi giao hàng (COD)</span>
+            </label>
+            <span class="desc" style="display: block;"></span>
+            <label class="lb-method">
+                <input class="input-method" type="radio" name="gateway" value="122494">
+                <span class="label-radio"> Chuyển khoản qua ngân hàng</span>
+            </label>
+            <label class="lb-method">
+                <input class="input-method" type="radio" name="gateway" value="122494">
+                <span class="label-radio"> Thanh toán trực tuyến</span>
+            </label>
+            <span class="desc"></span>
+        </div>
+    </div>
+    <div class="col-4">
+        <div class="box-cart">
+            <h2>Đơn hàng</h2>
+            (<span>@Model.Count()</span> sản phẩm)
+            <div class="cart-items">
+                @foreach (var cart in Model)
+                {
+                    <div class="list_item cart-item">
+                        <span>@cart.Quantity x</span>
+                        <span> @cart.Product.Name</span>
+                        <span class="price">@(cart.Product.PromotionPrice.HasValue ? cart.Product.PromotionPrice.Value.ToString("N0") : cart.Product.Price.Value.ToString("N0"))</span>
+                    </div>
+                }
+            </div>
+            <div class="total-price">
+                Tạm tính   <label id="tientam" value="@thanhtien"> @thanhtien.ToString("N0")đ</label>
+            </div>
+            <div class="total-checkout">
+                Tổng cộng <span>@thanhtien.ToString("N0")đ</span>
+            </div>
+        </div>
+        <button type="submit" class="btn-checkout">Đặt hàng</button>
+    </div>
+</div>
+
+

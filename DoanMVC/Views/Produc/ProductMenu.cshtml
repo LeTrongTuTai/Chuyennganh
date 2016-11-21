@@ -1,0 +1,13 @@
+﻿@model List<Model.EF.MENU>
+
+<div class="widget-category widget">
+    <h4 class="widget__title">Thể loại</h4>
+    <div class="widget__content">
+        <ul class="menu">
+            @foreach (var item in Model)
+            {
+                <li><a href="@item.Link">@item.Text</a></li>
+            }
+        </ul>
+    </div>
+</div>

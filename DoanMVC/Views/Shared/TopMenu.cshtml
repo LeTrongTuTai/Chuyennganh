@@ -1,0 +1,33 @@
+﻿
+@model List<Model.EF.MENU>
+<div class="site-header__account ultility-item large--left">
+    <span>
+        Tài khoản
+        <span class="fa fa-angle-down" aria-hidden="true"></span>
+    </span>
+    @{
+        var session = (DoanMVC.Common.UserLogin)Session[DoanMVC.Common.CommonConstants.USER_SESSION];
+    }
+    @if (session == null)
+    {
+        <ul>
+            @foreach (var item in Model)
+            {
+                <li>
+                    <i class="fa fa-smile-o"></i>
+                    <a href="@item.Link" class="customer_login_link" target="@item.Target">@item.Text</a>
+                </li>
+            }
+
+        </ul>
+    }
+    else
+    {
+        <ul>
+            <li> Xin chào: @session.UserName</li>
+            <li> @Html.ActionLink("Thoát", "Logout", "Account")</li>
+        </ul>
+    }
+
+
+</div>

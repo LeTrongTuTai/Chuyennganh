@@ -1,0 +1,60 @@
+﻿@model Model.EF.USERGROUP
+
+@{
+    ViewBag.Title = "Trang xóa nhóm người dùng: " + Model.ID;
+    Layout = "~/Areas/Admin/Views/Shared/_LayoutAD.cshtml";
+}
+
+@section header{
+    Xóa nhóm người dùng
+}
+<div class="row">
+    <div class="col-lg-12">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                Thông tin chi tiết
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    @if (ViewData["Error"] != null)
+                    {
+                        <h3 style="color:red">Xóa thất bại!</h3>
+                    }
+                    else
+                    {
+                        <h3>Bạn có chắc chắn muốn xóa bản ghi này?</h3>
+                    }
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Html.DisplayNameFor(model => model.ID)
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.ID)
+                        </dd>
+
+                        <dt>
+                           Tên
+                        </dt>
+
+                        <dd>
+                            @Html.DisplayFor(model => model.Name)
+                        </dd>
+
+                    </dl>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        <div class="form-actions no-color">
+                            <input type="submit" value="Xóa" class="btn btn-default" /> |
+                            @Html.ActionLink("Back to List", "Index")
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+

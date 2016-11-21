@@ -1,0 +1,40 @@
+﻿@model IEnumerable<Model.EF.CONTENT>
+
+
+@foreach (var item in Model)
+{
+    var url = "/tin-tuc/" + item.Metatitle + "-" + item.ID + ".html";
+    <article class="post">
+        <h4><a href="@url">@item.Name</a></h4>
+
+
+        <p class="entry-meta">Người viết <strong>@item.CreatedBy</strong> lúc <time datetime=":">@item.CreatedDate</time></p>
+
+        <div class="rte">
+            <a href="@url" title="" class="post-thumbnail">
+                <div><img src="@item.Image" data-mce-src="@item.Image"></div>
+            </a>
+
+            <p class="entry-content">@item.Description</p>
+        </div>
+        <ul class="inline-list">
+            <li>
+                <span>Tags:</span>
+
+                <a href="/tin-tuc.html">Tin tức</a>,
+
+                <a href="/">Trang chủ</a>,
+
+                <a href="/san-pham.html">Sản phẩm</a>,
+
+                <a href="/lien-he.html">liên hệ</a>,
+
+            </li>
+        </ul>
+        
+        <p><a class="btn" href="@url">Xem nhiều hơn &rarr;</a></p>
+        <hr>
+    </article>
+
+}
+

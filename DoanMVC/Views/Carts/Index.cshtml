@@ -1,0 +1,96 @@
+﻿@model List<DoanMVC.Models.CartItem>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section jsFooter{
+
+    <script src="/Areas/Client/js/Controllers/cartController.js">
+    </script>
+    <script>
+
+    </script>
+}
+<main class="wrapper main-content" role="main">
+    <nav class="breadcrumb" role="navigation" aria-label="breadcrumbs">
+        <img src='//hstatic.net/033/1000104033/1000147703/bg-breadcrumb.jpg?v=55' alt='' />
+        <div class="inner">
+            <div class="breadcrumb-list">
+                <a href="/" title="Quay lại trang chủ">Trang chủ</a>
+                <span aria-hidden="true">/</span>
+                <span>Giỏ hàng của bạn</span>
+            </div>
+        </div>
+    </nav>
+    <h3 class="page_name">Giỏ hàng</h3>
+    <form action="/cart" method="post" novalidate class="cart table-wrap">
+        @if (Model.Count > 0)
+            {
+            <table class="cart-table full table--responsive">
+                <thead class="cart__row cart__header-labels">
+                <th colspan="2" class="text-center">Sản phẩm</th>
+                <th class="text-center">Giá</th>
+                <th class="text-center">Số lượng</th>
+                <th class="text-right">Tổng</th>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        var url = "/san-pham/" + item.Product.Metatitle + "-" + item.Product.ID + ".html";
+                        <tr class="cart__row table__section">
+                            <td data-label="Sản phẩm">
+                                <a href="@url" class="cart__image">
+
+                                    <img src="@item.Product.Image" alt="@item.Product.Name">
+                                </a>
+                            </td>
+                            <td>
+                                <a href="@url" class="h6">
+                                    @item.Product.Name
+                                </a>
+                                <a href="#" data-id="@item.Product.ID" class="cart__remove">
+                                    <small>Xóa</small>
+                                </a>
+                            </td>
+                            <td data-label="Giá">
+                                <span class="h6">
+                                    @item.Product.Price.GetValueOrDefault(0).ToString("N0")
+                                </span>
+                            </td>
+                            <td data-label="Số lượng">
+                                <input type="number" name="updates[]" class="txtQuantity" data-id="@item.Product.ID" value="@item.Quantity" min="0">
+                            </td>
+                            <td data-label="Tổng" class="text-right">
+                                <span class="h6">
+                                    @((item.Product.Price.GetValueOrDefault(0) * item.Quantity).ToString("N0"))
+                                </span>
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+            <div class="grid cart__row">
+
+                <div class="grid__item two-thirds small--one-whole">
+                    <label for="CartSpecialInstructions">Ghi chú bán hàng</label>
+                    <textarea name="note" class="input-full" id="CartSpecialInstructions"></textarea>
+                </div>
+
+                <div class="grid__item text-right one-third small--one-whole">
+                    <p><em>Giao hàng & tính thuế khi bán hàng</em></p>
+                    <input type="submit" name="update" id="btnContinue" class="btn--secondary update-cart" value="Cập nhật giỏ hàng">
+                    <input type="submit" name="payment" id="btnPayment" class="btn" value="Thanh toán">
+                </div>
+            </div>
+            <p><h3>Tiếp tục xem <a href="/san-pham.html">tại đây</a>.</h3></p>
+        }
+        else
+        {
+            <p>Giỏ hàng của bạn đang trống.</p>
+
+            <p>Tiếp tục xem <a href="/san-pham.html">tại đây</a>.</p>
+        }
+    </form>
+
+</main>

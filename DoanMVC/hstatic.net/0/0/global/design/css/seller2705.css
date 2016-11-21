@@ -1,0 +1,14 @@
+﻿@media(max-width:1024px) {
+	.zopim {
+		-webkit-transition: all .5s ease-in-out 0s;
+		-moz-transition: all .5s ease-in-out 0s;
+		-o-transition: all .5s ease-in-out 0s;
+		transition: all .5s ease-in-out 0s;
+	}
+	.zopim:first-child {
+		right: -130px !important;
+	}
+	.shopregisteraction .zopim {
+		display:none;
+	}  
+}

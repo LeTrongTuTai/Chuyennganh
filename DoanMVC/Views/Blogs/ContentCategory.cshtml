@@ -1,0 +1,14 @@
+﻿@model IEnumerable<Model.EF.CONTENT>
+
+<h4 class="widget__title">Bài viết gần đây</h4>
+<div class="widget__content">
+    @foreach (var item in Model)
+    {
+        var url = "/tin-tuc/" + item.Metatitle + "-" + item.ID + ".html";
+        <div class="article">
+            <a href="@url">@item.Name</a>
+            <br>
+            <em datetime=":">@item.CreatedDate</em>
+        </div>
+    }
+</div>

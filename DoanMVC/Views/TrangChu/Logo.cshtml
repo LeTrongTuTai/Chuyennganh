@@ -1,0 +1,8 @@
+﻿@model List<Model.EF.LOGO>
+    @foreach (var item in Model)
+    {
+        <div class="text-center">
+            <a class="brand" href="@.Link" title=""><img src='@item.Logo' alt='' /></a>
+        </div>
+    }
+

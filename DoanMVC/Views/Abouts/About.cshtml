@@ -1,0 +1,59 @@
+﻿
+@{
+    ViewBag.Title = "About";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var item = (IEnumerable<Model.EF.ABOUT>)ViewBag.GioiThieu;
+}
+
+<main class="wrapper main-content" role="main">
+
+    <!-- /snippets/breadcrumb.liquid -->
+
+    <nav class="breadcrumb" role="navigation" aria-label="breadcrumbs">
+        <img src='../../hstatic.net/033/1000104033/1000147703/bg-breadcrumb8f26.jpg?v=55' alt='' />
+        <div class="inner">
+            <div class="breadcrumb-list">
+                <a href="../index.html" title="Quay lại trang chủ">Trang chủ</a>
+
+                <span aria-hidden="true">/</span>
+                <span>Giới thiệu</span>
+
+            </div>
+
+            <h3 class="page_name">Giới thiệu</h3>
+
+        </div>
+    </nav>
+
+    <!-- /templates/page.liquid -->
+
+    <div class="grid">
+        <div class="sidebar grid__item large--one-quarter">
+            <div class="collection-sidebar">
+                <!-- /snippets/collection-sidebar.liquid -->
+                @{ Html.RenderAction("ProductMenu", "Produc");}
+
+               @{Html.RenderAction("ProductHot", "Produc"); }
+
+                <div class="widget-cms widget">
+
+                    <h4 class="widget__title">CMS Hướng dẫn</h4>
+
+                    <em>khối CMS tùy chỉnh hiển thị ở thanh bên trái trên Catalog trang. Đặt nội dung của riêng bạn ở đây:. Text, html, hình ảnh, truyền thông ... bất cứ điều gì bạn thích </ em> <br> <em> Có rất nhiều tương tự như giữ chỗ nội dung mẫu trên cửa hàng. Tất cả có thể chỉnh sửa từ bảng quản trị.</em>
+                </div><!-- end advertising -->
+            </div>
+
+        </div>
+        <div class="grid__item large--three-quarters ">
+
+            <div class="rte">
+                <p>Trang giới thiệu giúp khách hàng hiểu rõ hơn về cửa hàng của bạn. Hãy cung cấp thông tin cụ thể về việc kinh doanh, về cửa hàng, thông tin liên hệ. Điều này sẽ giúp khách hàng cảm thấy tin tưởng khi mua hàng trên website của bạn.</p><p>Một vài gợi ý cho nội dung trang Giới thiệu:</p><div><ul><li><span>Bạn là ai</span><br></li><li><span>Giá trị kinh doanh của bạn là gì</span><br></li><li><span>Địa chỉ cửa hàng</span><br></li><li><span>Bạn đã kinh doanh trong ngành hàng này bao lâu rồi</span><br></li><li><span>Bạn kinh doanh ngành hàng online được bao lâu</span><br></li><li><span>Đội ngũ của bạn gồm những ai</span><br></li><li><span>Thông tin liên hệ</span><br></li><li><span>Liên kết đến các trang mạng xã hội (Twitter, Facebook)</span><br></li></ul></div>
+            </div>
+
+        </div>
+
+    </div>
+
+
+</main>
+

@@ -1,0 +1,148 @@
+﻿@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+    var logo = (List<Model.EF.LOGO>)ViewBag.Logos;
+
+    var newcontent = (List<Model.EF.CONTENT>)ViewBag.ContentNew;
+
+}
+
+<main class="main-content" role="main">
+
+    <!-- /templates/index.liquid -->
+    <section>
+        <div class="full_screen">
+            @{ Html.RenderAction("MainSlides", "TrangChu");}
+        </div>
+    </section>
+    <section>
+        <div class="wrapper">
+            <div class="inner space-30 space-top-60 section-intro">
+                <!-- /templates/snippets/section-intro.liquid -->
+                <div class="grid">
+                    <div class="grid__item large--one-half">
+                        <div class="intro">
+                            <h2 class="title">
+                                Basic Shop
+                            </h2>
+                            <p class="tes text-center">
+                                Chào mừng bạn đến với cửa hàng của chúng tôi.<br />
+                                Basic Shop cung cấp cho bạn những mẫu thời trang<br />
+                                mới và hot nhất trên thị trường hiện nay. Đến với cửa <br />
+                                hàng chúng tôi là lựa chọn tốt nhất chủa bạn.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="grid__item large--one-half">
+                        @{ Html.RenderAction("BotSlides", "TrangChu");}
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="wrapper">
+            <div class="inner space-30 section-product-tab">
+                <!-- /templates/snippets/section-product-tab.liquid -->
+                <div class="tab-products ">
+                    <h2 class="title">
+                        Sản phẩm
+                    </h2>
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation"><a href="#tab1" aria-controls="tab1" role="tab" data-toggle="tab">Sản phẩm mới</a></li>
+                        <li role="presentation"><a href="#tab2" aria-controls="tab2" role="tab" data-toggle="tab">Sản phẩm nổi bật</a></li>
+                        <li role="presentation"><a href="#tab3" aria-controls="tab3" role="tab" data-toggle="tab">Sản phẩm bán chạy</a></li>
+                    </ul>
+                    <div class="tab-content">
+
+                        <div role="tabpanel" class="tab-pane" id="tab1">
+                            <div class="grid">
+                                @{ Html.RenderAction("ProductNew", "TrangChu");}
+                            </div>
+
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="tab2">
+
+                            <div class="grid">
+                                @{ Html.RenderAction("ProductHot", "TrangChu");}
+
+                            </div>
+
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="tab3">
+
+                            <div class="grid">
+                                @{ Html.RenderAction("ProductBest", "TrangChu");}
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <script type="text/javascript" charset="utf-8">
+                    $(document).ready(function () {
+                        $('.nav-tabs li:first').addClass('active');
+                        $('.tab-content .tab-pane:first').addClass('active');
+                    });
+                </script>
+
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="wrapper">
+            <div class="inner space-30 section-blog">
+                <!-- /templates/snippets/section-blog.liquid -->
+
+
+                <div class="latest-posts">
+                    <h2 class="title section-header">Tin tức</h2>
+                    <div class="grid">
+                        @foreach (var item in newcontent)
+                        {
+                            var url = "/tin-tuc/" + item.Metatitle + "-" + item.ID+".html";
+                            <div class="grid__item  large--one-half medium--one-half ">
+                                <div class="latest-posts-body">
+                                    <div class="post-thumbnail">
+                                        <a href="@url" title="">
+                                            <div><img src="@item.Image" data-mce-src="@item.Image"></div>
+                                        </a>
+                                    </div>
+                                    <div class="entry-meta">
+                                        <em>@item.CreatedDate</em>
+                                        <div class="entry-content">
+                                            <h4 class="entry-title">
+                                                <a href="@url" title="@item.Name">@item.Name</a>
+                                            </h4>
+                                            <p>@item.Description</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class="wrapper">
+            <div class="inner  section-brand">
+                <!-- /templates/snippets/section-brand.liquid -->
+                <div class="brands-carousel owl-carousel owl-theme " id="brands-carousel" data-items="6" data-pagination="false" data-navigation="true" data-autoPlay="false">
+                    @foreach (var item in logo)
+                    {
+                        <div class="text-center">
+                            <a class="brand" href="@item.Link" title=""><img src='@item.Logo' alt='' /></a>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
